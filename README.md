@@ -2,7 +2,7 @@
 
 **Read-only, low-boilerplate runtime evidence for AI agents testing the real Android and iOS app.**
 
-HarnessLens is **not** the previous headless `mobile-harness-cli`. It does not create ViewModels, dispatch intents, mock APIs or replace normal unit tests. Use **agent-device** to operate the actual installed app (with real authorized staging APIs), and HarnessLens to capture *only the selected internal state and analytics events* that UI testing cannot see.
+Pairs with agent-device (or any UI agent) to provide internal state and analytics evidence alongside black-box UI testing.
 
 ## Deliverables
 
