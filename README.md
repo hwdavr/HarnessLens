@@ -35,11 +35,11 @@ CLI writes an app-private `control.json` via **ADB `run-as`** (debuggable Androi
 From this directory:
 
 ```bash
-python3 -m pip install --no-build-isolation -e .
+uv tool install --editable .
 hlens --help
 ```
 
-Or without installation: `PYTHONPATH=cli python3 -m harnesslens --help`.
+Or without installation: `uv run hlens --help` (or `PYTHONPATH=cli python3 -m harnesslens --help`).
 
 Requires Python 3.10+, `adb` for Android, or Xcode with `xcrun simctl` for iOS Simulator. Swift Package requires Xcode/Swift 5.9+; Android module uses Java/Kotlin and Android Gradle Plugin.
 
