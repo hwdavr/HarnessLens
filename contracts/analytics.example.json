@@ -1,0 +1,11 @@
+{
+  "schema_version": 1,
+  "scenario": "ev_charging_completed",
+  "allow_unexpected": true,
+  "expected_events": [
+    {"name": "charging_completed", "count": {"exact": 1}, "params": {
+      "payment_method": {"required": true, "type": "string", "one_of": ["linkpoints", "credit_card"]}
+    }}
+  ],
+  "forbidden_events": ["charging_failed"]
+}

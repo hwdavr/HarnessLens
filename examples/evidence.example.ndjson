@@ -1,0 +1,4 @@
+{"type":"capture_ready","version":1,"run_id":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","timestamp_ms":1792880000000}
+{"type":"state","scope":"ev.payment","values":{"status":"pending","retryCount":1},"sequence":1,"run_id":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","timestamp_ms":1792880000001}
+{"type":"event","name":"charging_completed","params":{"payment_method":"linkpoints"},"sequence":2,"run_id":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","timestamp_ms":1792880000002}
+{"type":"state","scope":"ev.payment","values":{"status":"confirmed","retryCount":2},"sequence":3,"run_id":"aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa","timestamp_ms":1792880000003}

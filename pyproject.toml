@@ -1,0 +1,18 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "harnesslens-cli"
+version = "0.1.0"
+description = "Local Android/iOS debug evidence capture and contract verification CLI"
+requires-python = ">=3.10"
+
+[project.scripts]
+hlens = "harnesslens.cli:main"
+
+[tool.setuptools]
+package-dir = {"" = "cli"}
+
+[tool.setuptools.packages.find]
+where = ["cli"]

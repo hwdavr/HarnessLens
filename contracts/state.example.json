@@ -1,0 +1,7 @@
+{
+  "schema_version": 1,
+  "assertions": [
+    {"scope": "ev.payment", "field": "status", "equals": "confirmed"},
+    {"scope": "ev.payment", "field": "retryCount", "equals": 2}
+  ]
+}
