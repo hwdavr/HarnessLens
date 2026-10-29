@@ -1,0 +1,21 @@
+{
+  "mappings": [
+    {
+      "name": "graphql-empty",
+      "request": {"method": "POST", "urlPath": "/graphql", "bodyPatterns": [
+        {"matchesJsonPath": {"expression": "$.operationName", "equalTo": "Accounts"}},
+        {"matchesJsonPath": {"expression": "$.variables.tier", "equalTo": "empty"}}
+      ]},
+      "response": {"status": 200, "headers": {"Content-Type": "application/json"}, "jsonBody": {"data": {"accounts": []}}}
+    },
+    {
+      "name": "graphql-forbidden",
+      "priority": 1,
+      "request": {"method": "POST", "urlPath": "/graphql", "bodyPatterns": [
+        {"matchesJsonPath": {"expression": "$.operationName", "equalTo": "Account"}},
+        {"matchesJsonPath": {"expression": "$.variables.id", "equalTo": "denied"}}
+      ]},
+      "response": {"status": 200, "headers": {"Content-Type": "application/json"}, "jsonBody": {"data": {"account": null}, "errors": [{"message": "Forbidden", "path": ["account"], "extensions": {"code": "FORBIDDEN"}}]}}
+    }
+  ]
+}

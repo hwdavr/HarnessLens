@@ -3,6 +3,7 @@
 **Read-only, low-boilerplate runtime evidence for AI agents testing the real Android and iOS app.**
 
 Pairs with agent-device (or any UI agent) to provide internal state and analytics evidence alongside black-box UI testing.
+It also includes `hlens mock` commands for session-scoped WireMock 3 backend responses and request verification while testing the real app.
 
 ## Deliverables
 
@@ -122,6 +123,23 @@ hlens analytics verify --file artifacts/evidence.ndjson \
 ```
 
 For iOS Simulator, change `--platform ios` and supply its bundle ID. To target a specific emulator/simulator, use `--device-id`.
+
+## Control backend responses with WireMock
+
+HarnessLens can configure a WireMock 3 server without adding a Python dependency. Review `examples/wiremock/README.md` and run `hlens mock --help`. Use the QA run ID as `--session`, then apply a native WireMock mapping or bundle, drive the actual app, verify expected hits, and reset only that session. Existing WireMock servers are supported. `start --jar` starts a local loopback server in the foreground with a trusted standalone JAR; it does not install or download WireMock. Set `HLS_WIREMOCK_JAR` in your shell profile to reuse a local JAR path without repeating `--jar`.
+
+```bash
+export HLS_WIREMOCK_JAR="/path/to/wiremock-standalone-3.13.2.jar"
+hlens mock --url http://127.0.0.1:8080 --session qa-run-01 --exclusive start
+hlens mock --url http://127.0.0.1:8080 --session qa-run-01 --exclusive \
+  apply examples/wiremock/rest-query.json
+# Drive the actual application through the UI testing tool, then:
+hlens mock --url http://127.0.0.1:8080 --session qa-run-01 --exclusive \
+  verify --name accounts-empty --min-hits 1
+hlens mock --url http://127.0.0.1:8080 --session qa-run-01 --exclusive reset
+```
+
+`hlens mock` controls backend responses only. App URL/TLS routing remains the test application's responsibility. WireMock's Admin API journal retains raw request bodies in memory; keep the server private and use test data. See the example guide for shared-session headers, real-backend passthrough, REST/GraphQL fixtures and the optional real-server integration test.
 
 **Do not use `capture start` as a substitute for app initialization.** If the app is already running but emits no state or analytics after capture starts, there will be no `capture_ready` marker and the CLI returns INCONCLUSIVE. Launch, reload or interact with the instrumented app after arming capture.
 

@@ -1,0 +1,9 @@
+{
+  "name": "payment-declined",
+  "request": {
+    "method": "POST", "urlPath": "/payments",
+    "headers": {"Content-Type": {"contains": "application/json"}},
+    "bodyPatterns": [{"matchesJsonPath": {"expression": "$.amount", "equalTo": "42"}}]
+  },
+  "response": {"status": 422, "headers": {"Content-Type": "application/json"}, "jsonBody": {"error": "payment_declined"}}
+}

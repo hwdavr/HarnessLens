@@ -1,0 +1,14 @@
+{
+  "mappings": [
+    {
+      "name": "accounts-empty",
+      "request": {"method": "GET", "urlPath": "/accounts", "queryParameters": {"page": {"equalTo": "0"}}},
+      "response": {"status": 200, "headers": {"Content-Type": "application/json"}, "jsonBody": {"accounts": [], "nextPage": 1}}
+    },
+    {
+      "name": "accounts-last-page",
+      "request": {"method": "GET", "urlPath": "/accounts", "queryParameters": {"page": {"equalTo": "1"}}},
+      "response": {"status": 200, "headers": {"Content-Type": "application/json"}, "jsonBody": {"accounts": [{"id": "synthetic-account"}], "nextPage": null}}
+    }
+  ]
+}

@@ -1,0 +1,6 @@
+{
+  "name": "real-backend",
+  "priority": 10000,
+  "request": {"method": "ANY", "urlPathPattern": "/.*"},
+  "response": {"proxyBaseUrl": "__UPSTREAM__"}
+}

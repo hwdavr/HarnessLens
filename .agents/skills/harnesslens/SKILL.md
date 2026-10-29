@@ -12,7 +12,7 @@ Use when you need internal UI/ViewModel state evidence or analytics event contra
 1. Confirm target is authorized debug Android app or iOS Simulator. Never use on a production account/device. Confirm SDK is integrated (Android install + state hook or Swift state hook, analytics decorator if required).
 2. Read `README.md` and contract. Do not synthesize expected observations from code or guesses.
 3. Run `hlens capture start --platform PLATFORM --app-id APP_ID`. Retain the `run_id` in test evidence.
-4. Drive **the actual app** with `agent-device`; run against approved staging real APIs. AppProbe/HarnessLens does not control UI.
+4. Drive **the actual app** with `agent-device`; use approved staging APIs by default. For an explicitly controlled scenario, `hlens mock` can set backend responses while HarnessLens remains the state/analytics collector. AppProbe/HarnessLens does not control UI or app request routing.
 5. Inspect `hlens state get` or `hlens state await` as needed, and screenshots/HTTP evidence separately.
 6. Run `hlens capture stop` then `hlens capture export --out ARTIFACT.ndjson`.
 7. Run `hlens state verify` and/or `hlens analytics verify` using approved contracts. Preserve JSON/Markdown reports and evidence paths.
@@ -23,6 +23,7 @@ Use when you need internal UI/ViewModel state evidence or analytics event contra
 
 - `agent-device`: app navigation, UI observation, screenshots.
 - `mitmproxy`: optional real HTTP inspection (with authorized debug trust configuration).
+- `hlens mock`: optional session-scoped backend response fixtures, matched request verification and cleanup; see the HarnessLens repository's `examples/wiremock/README.md`.
 - `hlens`: internal selected state/analytics, local app-private NDJSON, contract gates.
 - Backend verification: staging API/database evidence when the acceptance criteria need it.
 

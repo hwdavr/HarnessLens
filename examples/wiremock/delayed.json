@@ -1,0 +1,5 @@
+{
+  "name": "slow-accounts",
+  "request": {"method": "GET", "urlPath": "/slow-accounts"},
+  "response": {"status": 200, "fixedDelayMilliseconds": 350, "headers": {"Content-Type": "application/json"}, "jsonBody": {"accounts": []}}
+}

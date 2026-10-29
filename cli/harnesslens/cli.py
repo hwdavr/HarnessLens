@@ -12,6 +12,7 @@ from pathlib import Path
 from .device import Device, DeviceError
 from .model import EvidenceError, parse_evidence, read_file, state_get, state_history, field_value, analytics_events, state_contract
 from . import analytics_contract
+from .wiremock import add_parser as add_wiremock_parser, dispatch as dispatch_wiremock
 
 
 def display(value: object) -> None:
@@ -82,6 +83,7 @@ def main(argv: list[str] | None = None) -> int:
         if name == "verify":
             cmd.add_argument("--contract", type=Path, required=True)
             cmd.add_argument("--report-dir", type=Path, required=True)
+    add_wiremock_parser(sub)
     args = p.parse_args(argv)
     try:
         return dispatch(args)
@@ -91,9 +93,13 @@ def main(argv: list[str] | None = None) -> int:
     except (OSError, json.JSONDecodeError, ValueError) as exc:
         print(f"INVALID_INPUT: {exc}", file=sys.stderr)
         return 3
+    except KeyboardInterrupt:
+        return 130
 
 
 def dispatch(args: argparse.Namespace) -> int:
+    if args.group == "mock":
+        return dispatch_wiremock(args)
     if args.group == "capture":
         device = Device(args.platform, args.app_id, args.device_id)
         if args.command == "start":

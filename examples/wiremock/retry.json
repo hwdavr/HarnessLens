@@ -1,0 +1,14 @@
+{
+  "mappings": [
+    {
+      "name": "retry-error", "scenarioName": "accounts-retry", "requiredScenarioState": "Started", "newScenarioState": "recovered",
+      "request": {"method": "GET", "urlPath": "/retry-accounts"},
+      "response": {"status": 503, "headers": {"Content-Type": "application/json", "Retry-After": "0"}, "jsonBody": {"error": "unavailable"}}
+    },
+    {
+      "name": "retry-success", "scenarioName": "accounts-retry", "requiredScenarioState": "recovered",
+      "request": {"method": "GET", "urlPath": "/retry-accounts"},
+      "response": {"status": 200, "headers": {"Content-Type": "application/json"}, "jsonBody": {"accounts": []}}
+    }
+  ]
+}
